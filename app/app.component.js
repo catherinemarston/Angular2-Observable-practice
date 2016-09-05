@@ -28,6 +28,7 @@ System.register(['angular2/core', 'rxjs/Rx'], function(exports_1) {
                         .debounceTime(400)
                         .distinctUntilChanged()
                         .flatMap(function (searchTerm) {
+                        //this would normally go in a service. Bad idea to have this logic in a controller but for a simple example, it will suffice.
                         var url = "https://api.spotify.com/v1/search/?type=artist&q=" + searchTerm;
                         var promise = $.getJSON(url);
                         //getJSON method returns a promise
@@ -38,7 +39,8 @@ System.register(['angular2/core', 'rxjs/Rx'], function(exports_1) {
                     });
                     //start with an observable and keep putting filters on it
                     //
-                    keyups.subscribe(function (data) { return console.log(data); });
+                    var subscription = keyups.subscribe(function (data) { return console.log(data); });
+                    //now data is the JSON object we get from the server
                 }
                 AppComponent = __decorate([
                     core_1.Component({

@@ -10,7 +10,8 @@ import {Observable} from 'rxjs/Rx';
     `
 })
 
-//version without OBSERVABLES
+//********version without OBSERVABLES*****
+// **************
 
 // export class AppComponent {
 //     constructor(){
@@ -46,6 +47,7 @@ export class AppComponent {
   .debounceTime(400)
   .distinctUntilChanged()
   .flatMap(searchTerm => {
+    //this would normally go in a service. Bad idea to have this logic in a controller but for a simple example, it will suffice.
     var url = "https://api.spotify.com/v1/search/?type=artist&q=" + searchTerm;
         var promise = $.getJSON(url);
         //getJSON method returns a promise
@@ -57,8 +59,8 @@ export class AppComponent {
   //start with an observable and keep putting filters on it
   //
 
-  keyups.subscribe(data => console.log(data));
-
+  var subscription = keyups.subscribe(data => console.log(data));
+//now data is the JSON object we get from the server
 
    }
 }
